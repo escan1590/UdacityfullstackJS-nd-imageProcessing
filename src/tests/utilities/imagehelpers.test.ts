@@ -11,7 +11,7 @@ describe("image helpers function results", () => {
   const height = 200;
 
   describe("resize function", () => {
-    it("should return the name of the resized file", async () => {
+    it("should return gunTest-resized.jpg", async () => {
       const fileNameExt = await resize(fileName, width, height);
       expect(fileNameExt).toBe("gunTest-resized.jpg");
     });
@@ -30,7 +30,7 @@ describe("image helpers function results", () => {
   });
 
   describe("check resized function", () => {
-    it("should return true to show that the height and the width are the one specified", async () => {
+    it("should return true", async () => {
       const resized = await checkResizedFileDimension(fileName, width, height);
       expect(resized).toBeTrue();
     });

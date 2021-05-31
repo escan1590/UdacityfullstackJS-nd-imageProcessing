@@ -44,35 +44,39 @@ var imagehelpers_1 = require("../../utilities/imagehelpers");
 var config_1 = require("../../utilities/config");
 var images = express_1.default.Router();
 images.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, filename, width, height, fileNameExt, resized, error_1;
+    var _a, filename, width, height, valid, fileNameExt, resized, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _a = req.query, filename = _a.filename, width = _a.width, height = _a.height;
                 _b.label = 1;
             case 1:
-                _b.trys.push([1, 4, , 5]);
-                if (!filename || !height || !width) {
-                    res.send({
-                        message: "enter fileName with and height as query parameters to resize your image",
-                    });
-                    throw new Error("No parameters entered");
+                _b.trys.push([1, 5, , 6]);
+                if (Object.keys(req.query).length === 0) {
+                    res.send("Enter filename, width and height as query parameters to resize your image");
                 }
-                return [4 /*yield*/, imagehelpers_1.resize(String(filename), Number(width), Number(height))];
+                return [4 /*yield*/, imagehelpers_1.checkResizeParams(String(filename), Number(width), Number(height), function (status, message) {
+                        res.status(status).send(message);
+                    })];
             case 2:
+                valid = _b.sent();
+                if (!valid)
+                    throw new Error("invalid parameters");
+                return [4 /*yield*/, imagehelpers_1.resize(String(filename), Number(width), Number(height))];
+            case 3:
                 fileNameExt = _b.sent();
                 return [4 /*yield*/, imagehelpers_1.checkResizedFileDimension(filename + "-resized", Number(width), Number(height))];
-            case 3:
+            case 4:
                 resized = _b.sent();
                 if (resized) {
-                    res.sendFile(config_1.outputFolder + "/" + fileNameExt);
+                    res.status(201).sendFile(config_1.outputFolder + "/" + fileNameExt);
                 }
-                return [3 /*break*/, 5];
-            case 4:
+                return [3 /*break*/, 6];
+            case 5:
                 error_1 = _b.sent();
                 console.error(error_1);
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); });

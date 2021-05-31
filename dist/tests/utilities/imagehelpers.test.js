@@ -42,8 +42,18 @@ describe("image helpers function results", function () {
     var fileName = "gunTest";
     var width = 200;
     var height = 200;
+    describe("check params function", function () {
+        var negativeWidth = -200;
+        var negativeHeight = -200;
+        it("should return true for posidtive width and height", function () {
+            expect(imagehelpers_1.checkResizeParams(fileName, width, height, function () { })).toBeTrue();
+        });
+        it("should return false for negative width and height", function () {
+            expect(imagehelpers_1.checkResizeParams(fileName, negativeWidth, negativeHeight, function () { })).toBeFalse();
+        });
+    });
     describe("resize function", function () {
-        it("should return the name of the resized file", function () { return __awaiter(void 0, void 0, void 0, function () {
+        it("should return gunTest-resized.jpg", function () { return __awaiter(void 0, void 0, void 0, function () {
             var fileNameExt;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -83,7 +93,7 @@ describe("image helpers function results", function () {
         }); });
     });
     describe("check resized function", function () {
-        it("should return true to show that the height and the width are the one specified", function () { return __awaiter(void 0, void 0, void 0, function () {
+        it("should return true", function () { return __awaiter(void 0, void 0, void 0, function () {
             var resized;
             return __generator(this, function (_a) {
                 switch (_a.label) {

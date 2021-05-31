@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --build",
     "test": "tsc --build && yarn run jasmine",
-    "start": "nodemon dist/index.ts",
+    "start": "nodemon dist/index.js",
     "dev": "nodemon --config nodemon.json src/index.ts",
     "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
     "jasmine": "jasmine"

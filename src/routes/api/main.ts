@@ -3,7 +3,8 @@ const mainRoute = express.Router();
 
 mainRoute.get("/", (req, res) => {
   res.json({
-    message: "hello world of apis",
+    message:
+      "Enter your image name with width and height as params the image must be in /assets/full folder",
   });
 });
 
